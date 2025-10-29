@@ -1,0 +1,30 @@
+:root {
+    --question-width: 200px;
+    --question-height: 100px;
+}
+
+#question-box {
+    display:grid;
+    
+    margin-left: 25%;
+    margin-top: 25%;
+
+    grid-template-columns: repeat(2, var(--question-width));
+    grid-template-rows: auto;
+    row-gap: 10px;
+    column-gap: 10px;
+}
+
+.question {
+    background-color: beige;
+    border-color: aliceblue;
+    border: 10px;
+    
+    width: var(--question-width);
+    height: var(--question-height);
+    text-align: center;
+}
+
+.question:hover {
+    background-color: aliceblue;
+}
