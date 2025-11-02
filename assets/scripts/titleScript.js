@@ -1,6 +1,6 @@
 // trivia API I wish to use: https://the-trivia-api.com/
 // e.g. https://the-trivia-api.com/api/questions?limit=10&categories=science,film_and_tv
-/* Victor Richardson CIS-223 Final Project ---- 10/29/25
+/* Quacky Wacky CIS-223 Final Project ---- 10/29/25
 For my final project, I want to create a small quiz game that utilizes Fetch to retrieve trivia questions, answers, and incorrect answers based on difficulty, category and type.
 
 A user will first be met with a screen that houses the settings to the game, as well as the start button. Ideas for the settings are category, difficulty, and maybe more.
