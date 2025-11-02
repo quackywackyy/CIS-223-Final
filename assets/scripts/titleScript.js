@@ -1,6 +1,6 @@
 // trivia API I wish to use: https://the-trivia-api.com/
 // e.g. https://the-trivia-api.com/api/questions?limit=10&categories=science,film_and_tv
-/* Victor Richardson CIS-223 Final Project
+/* Victor Richardson CIS-223 Final Project ---- 10/29/25
 For my final project, I want to create a small quiz game that utilizes Fetch to retrieve trivia questions, answers, and incorrect answers based on difficulty, category and type.
 
 A user will first be met with a screen that houses the settings to the game, as well as the start button. Ideas for the settings are category, difficulty, and maybe more.
@@ -17,7 +17,7 @@ HINTS (possible): If time allows, I want a hint system that will rid of two of t
 TIMER (possible): An option to make each question timed so there is limited time to guess.
 MUSIC/SOUND EFFECTS (possible): I want music and sound effects so the whole page isn't dull
 
-Other Notes:
+Other Notes: ---- 11/2/25
 Want to figure out if there's an easier/better way to structure this project. Mainly with having only 1 script/html/css file so I don't need to figure out a way to export the API link
 If I stick with this structure, I will need to figure out how to export the api url into the other script file.
 
