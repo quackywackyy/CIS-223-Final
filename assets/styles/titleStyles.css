@@ -1,6 +1,22 @@
 body {
     background-image: url("/assets/images/quiz_background.png");
-    background-repeat: no-repeat;
     background-position-x: center;
     background-size: cover;
+    display: flex;
+    justify-content: center;
+
+}
+
+#menu {
+    margin-top: 25%;
+    background-color: aliceblue;  
+    display: grid;
+}
+
+#category-dialog {
+    background-color: aliceblue;
+}
+
+#categories {
+    display: grid;
 }

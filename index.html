@@ -3,12 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="assets\scripts\titleScript.js" defer></script>
-    <link href="assets\styles\titleStyles.css" rel="stylesheet">
+    <script src="assets/scripts/titleScript.js" defer></script>
+    <link href="assets/styles/titleStyles.css" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-    start page
-    <a href="quiz.html">TEMP START</a>
+    <div id="menu">
+        <button id="start">Start Quiz</button>
+        <!-- Categories: "music" "sport_and_leisure" 
+        "film_and_tv" "arts_and_literature" 
+        "history" "society_and_culture" "
+        science" "geography" 
+        "food_and_drink" "general_knowledge"-->
+        <dialog id="dialogC">
+            <div id="categories">
+                <label>
+                General Knowledge
+                <input value="general_knowledge" type="checkbox" checked/>
+                </label>
+                <label>
+                    Sport and leisure
+                    <input value="sport_and_leisure" type="checkbox"/>
+                </label>
+                <label>
+                    Music
+                    <input value="music" type="checkbox"/>
+                </label>
+                <label>
+                    Society and Culture
+                    <input value="society_and_culture" type="checkbox"/>
+                </label>
+                <label>
+                    Science
+                    <input value="science" type="checkbox"/>
+                </label>
+                <label>
+                    History
+                    <input value="history" type="checkbox"/>
+                </label>
+                <label>
+                    Food and Drink
+                    <input value="food_and_drink" type="checkbox"/>
+                </label>
+                <label>
+                    Geography
+                    <input value="geography" type="checkbox"/>
+                </label>
+                <label>
+                    Arts and Literature
+                    <input value="arts_and_literature" type="checkbox"/>
+                </label>
+                <label>
+                    Film and TV
+                    <input value="film_and_tv" type="checkbox"/>
+                </label>
+            </div>
+            <button type="button" id="confirm-button">Confirm</button>
+        </dialog>
+        <button type="button" id="category-button">Select Category</button>
+
+
+        <dialog id="dialogD">
+            <div id="difficulties">
+                <label>
+                    Easy
+                    <input type="radio" value="easy" name="diff" id="easy-radio" checked>
+                </label>
+                <label>
+                    Intermediate
+                    <input type="radio" value="intermediate" name="diff" id="intermediate-radio">
+                </label>
+                <label>
+                    Hard
+                    <input type="radio" value="hard" name="diff" id="hard-radio">
+                </label>
+                <button type="button" id="confirm-diff-button">Confirm</button>
+            </div>
+        </dialog>
+        <button type="button" id="difficulty-button">Choose Difficulty</button>
+    </div>
 </body>
 </html>
