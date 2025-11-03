@@ -45,6 +45,7 @@ startButton.addEventListener("click", async () => { // this event listener will 
     const category = await formatCats(categories);
     console.log(category + difficulty); // this does log but the page changes before it does
 
+    window.location.href = "quiz.html" // remove this to see
 })
 
 
