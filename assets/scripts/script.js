@@ -45,7 +45,10 @@ startButton.addEventListener("click", async () => { // this event listener will 
     const category = await formatCats(categories);
     console.log(category + difficulty); // this does log but the page changes before it does
 
-    window.location.href = "quiz.html" // remove this to see
+    // make the menu invisible and the questions visible by removing and adding the appropriate classes
+    document.getElementById("menu").classList.add("invisible-div");
+    document.getElementById("question-box").classList.remove("invisible-div");
+
 })
 
 
@@ -75,3 +78,12 @@ async function formatCats(categories) {
     return data.join(",");
 }
 
+
+/*const questionOne = document.getElementById("qu-one");
+
+function questionClicked() {
+    alert("button one pressed");
+}
+
+questionOne.addEventListener("click", questionClicked);
+*/

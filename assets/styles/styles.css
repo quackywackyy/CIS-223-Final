@@ -3,6 +3,41 @@
     --question-height: 100px;
 }
 
+
+/*Title CSS*/
+
+/*
+Visibility classes
+*/
+.invisible-div {
+    visibility: collapse;
+}
+/**/
+body {
+    background-image: url("/assets/images/quiz_background.png");
+    background-position-x: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+
+}
+
+#menu {
+    margin-top: 25%;
+    background-color: aliceblue;  
+    display: grid;
+}
+
+#category-dialog {
+    background-color: aliceblue;
+}
+
+#categories {
+    display: grid;
+}
+
+/*Quiz css*/
+
 /*ALl colors are temp*/
 
 
