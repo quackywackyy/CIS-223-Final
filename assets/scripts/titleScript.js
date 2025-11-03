@@ -34,17 +34,17 @@ const confirmDiffButton = document.getElementById("confirm-diff-button");
 
 const startButton = document.getElementById("start");
 
-const categories = document.querySelectorAll("input[type='checkbox']:checked"); // mdn help me find this cool trick
-const difficultyRadio = document.querySelectorAll("input[name='diff']:checked"); 
 
 
 startButton.addEventListener("click", async () => { // this event listener will collect all the values of the check marks/radios
+
+    const categories = document.querySelectorAll("input[type='checkbox']:checked"); // mdn help me find this cool trick
+    const difficultyRadio = document.querySelectorAll("input[name='diff']:checked"); 
 
     const difficulty = difficultyRadio[0].value;
     const category = await formatCats(categories);
     console.log(category + difficulty); // this does log but the page changes before it does
 
-    window.location.href = "/quiz.html"; // comment this out to see the formatted data and stuff
 })
 
 
