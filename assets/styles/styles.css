@@ -40,25 +40,25 @@ body {
 
 /*ALl colors are temp*/
 
-
 #question-box {
+    margin-top: 15%;
     display:grid;
-    
-    margin-left: 25%;
-    margin-top: 10%;
-
     grid-template-columns: repeat(2, var(--question-width));
     grid-template-rows: auto;
     row-gap: 10px;
     column-gap: 10px;
 }
 
-#qu-title {
+#question-title {
     grid-column: 1 / span 2;
     line-height: 3em;
     text-align: center;
     background-color: aliceblue;
     border-radius: 5px;
+}
+
+#try-again {
+    margin-top: 25%;
 }
 
 .question {
@@ -72,7 +72,6 @@ body {
     height: var(--question-height);
     text-align: center;
     line-height: 6em;
-
 }
 
 .question-hover:hover {
@@ -81,3 +80,4 @@ body {
     scale: 1.05;
     transform: rotate(1deg);
 }
+

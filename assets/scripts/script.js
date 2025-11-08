@@ -22,7 +22,9 @@ Want to figure out if there's an easier/better way to structure this project. Ma
 If I stick with this structure, I will need to figure out how to export the api url into the other script file.
 
 */
-
+// variables that are global
+let life = 3;
+let triviaQuestions;
 
 const categoryDialog = document.getElementById("dialogC");
 const categoryButton = document.getElementById("category-button");
@@ -36,19 +38,21 @@ const startButton = document.getElementById("start");
 
 
 
-startButton.addEventListener("click", async () => { // this event listener will collect all the values of the check marks/radios
+startButton.addEventListener("click", async () => { // this event listener will collect all the values of the check marks/radios AND change the page layout to start the quiz
 
     const categories = document.querySelectorAll("input[type='checkbox']:checked"); // mdn help me find this cool trick
     const difficultyRadio = document.querySelectorAll("input[name='diff']:checked"); 
 
     const difficulty = difficultyRadio[0].value;
-    const category = await formatCats(categories);
-    console.log(category + difficulty); // this does log but the page changes before it does
+    const categoryList = await formatCats(categories);
 
     // make the menu invisible and the questions visible by removing and adding the appropriate classes
     document.getElementById("menu").classList.add("invisible-div");
     document.getElementById("question-box").classList.remove("invisible-div");
 
+    triviaQuestions = await getQuestions(categoryList, difficulty);
+    
+    quizQuestion(0); // not permanent
 })
 
 
@@ -79,11 +83,105 @@ async function formatCats(categories) {
 }
 
 
-/*const questionOne = document.getElementById("qu-one");
+// API fetch call to get our data
+// base from https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+async function getQuestions(categories, difficulty) {
+  const url = `https://the-trivia-api.com/api/questions?limit=10&categories=${categories}&difficulty=${difficulty}`;
+  try {
+    const response = await fetch(url); // the request to the API
+    if (!response.ok) { // if the request comes back invalid (will do more stuff here)
+      throw new Error(`Response status: ${response.status}`);
+    }
 
-function questionClicked() {
-    alert("button one pressed");
+    const result = await response.json(); // convert the json data to objects and arrays
+    return result;
+  } catch (error) {
+    console.error(error.message);
+  }
 }
 
-questionOne.addEventListener("click", questionClicked);
-*/
+// start of quiz code
+
+
+
+class Answer {
+    answer = "";
+    card;
+    isRight = false;
+
+    constructor(answerText, number, right) {
+        this.answer = answerText;
+        this.card = document.getElementById(`question-${number}`); // retrieve the card based on the number and set this.card to it
+        this.isRight = right;
+    
+    } 
+
+    setCard() { // set the card in the question interface to be this answer
+        this.card.addEventListener("click", this.whenClicked.bind(this), { once: true}); // add an event listener to the card that will only activate once. The .bind allows us to call the function while keeping the this context(?)
+        this.card.textContent = this.answer;
+        // some css class stuff that I haven't created yet
+    }
+
+    whenClicked() {
+        if (this.isRight == true) {
+            // if it's RIGHT
+
+
+            this.card.classList.remove("question-hover");
+    
+
+        } else {
+            //if it's WRONG
+
+            this.card.classList.remove("question-hover");
+            
+            loseLife();
+        }
+       // more css stuff that I haven't created yet 
+    }
+
+    //
+
+}
+
+function loseLife() { // function to lose a life
+    console.log("lost a life!");
+}
+
+// The main logic and code | putting it in a function so we can call it later
+async function quizGame() {
+    if (triviaQuestions) {
+       
+        
+    } else { // if we failed to retrieve the data, tell them to try again
+        document.getElementById("menu").classList.add("invisible-div"); 
+        document.getElementById("question-box").classList.add("invisible-div");
+        document.getElementById("try-again").classList.remove("invisible-div");
+
+    }
+}
+
+
+function quizQuestion(questionNumber) {
+    const question = triviaQuestions[questionNumber]; // so the handling of questions is easier
+    const rightAnswer = question.correctAnswer; // store a variable so we know which answer is the right one
+    let answers = new Array(); // create a new array to hold the answers
+    
+    answers.push(question.correctAnswer, question.incorrectAnswers[0], question.incorrectAnswers[1], question.incorrectAnswers[2]); // store the answers into the array
+    
+    answers.sort(); // sort the answers in alphabetical order to jumble them up.
+
+    document.getElementById("question-title").textContent = question.question // set the question title
+    for (let index = 0; index < answers.length; index++) {
+        const answer = new Answer(
+            answers[index], 
+            index+1, 
+            rightAnswer === answers[index] ? true : false
+        ); // create a new question using the array's current index's value. Set the answer number to index+1 since index is 0-3 and answer number 1-4. Quick and cool use of the ternary operator to set the right answer to true if answer[index] is the correct answer.
+        
+        answer.setCard();
+    }
+
+}
+
+
