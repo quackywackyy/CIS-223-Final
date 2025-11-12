@@ -57,6 +57,16 @@ body {
     border-radius: 5px;
 }
 
+#timer-box {
+    grid-column: 1 / span 2;
+    background-color: green;
+    border-radius: 5px;
+    min-height: 10px;
+    width: 410px;
+}
+
+
+
 #try-again {
     margin-top: 25%;
 }

@@ -17,7 +17,11 @@ MUSIC/SOUND EFFECTS (possible): I want music and sound effects so the whole page
 
 Other Notes: ---- 11/2/25
 Want to figure out if there's an easier/better way to structure this project. Mainly with having only 1 script/html/css file so I don't need to figure out a way to export the API link
-If I stick with this structure, I will need to figure out how to export the api url into the other script file.*/
+If I stick with this structure, I will need to figure out how to export the api url into the other script file.
+
+11/12/25
+added timer div, will edit color and width to shrink it down to 15 seconds
+*/
 
 const categoryDialog = document.getElementById("dialogC");
 const categoryButton = document.getElementById("category-button");
@@ -35,7 +39,7 @@ categoryButton.addEventListener("click", () => {
 })
 
 confirmButton.addEventListener("click", () => {
-    categoryDialog.close()
+    categoryDialog.close();
 })
 
 difficultyButton.addEventListener("click", () => {
@@ -43,7 +47,7 @@ difficultyButton.addEventListener("click", () => {
 })
 
 confirmDiffButton.addEventListener("click", () => {
-    difficultyDialog.close()
+    difficultyDialog.close();
 })
 
 
@@ -95,7 +99,9 @@ startButton.addEventListener("click", async () => { // this event listener will 
     document.getElementById("menu").classList.add("invisible-div");
     document.getElementById("question-box").classList.remove("invisible-div");
 
+
     askQuestion(); // ask the first question, starting the chain that will start our game
+
 
     // putting the event listeners after the question creation so answers isn't undefined
     document.getElementById(`question-1`).addEventListener("click", whenClicked.bind(null, 1)); // using bind so we can pass parameters into it
