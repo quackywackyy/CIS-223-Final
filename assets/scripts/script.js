@@ -22,6 +22,7 @@ If I stick with this structure, I will need to figure out how to export the api 
 11/12/25
 added timer div, will edit color and width to shrink it down to 15 seconds
 */
+const timerBox = document.getElementById("timer-box");
 
 const categoryDialog = document.getElementById("dialogC");
 const categoryButton = document.getElementById("category-button");
@@ -212,6 +213,7 @@ function createQuestion(questionNumber) {
 async function askQuestion() {
     if (gameStillGoing) { // if the game is still going,
         createQuestion(currentNumber); // ask a question
+        restartTimer();
         if (currentNumber < 10) { // if the question number is below 10 (max amount of questions)
             currentTimeout = setTimeout(() => {
                 // maybe lose a life?
@@ -226,3 +228,44 @@ async function askQuestion() {
         }
     }
 } 
+// stuff for the timer
+let currentAnimationID = 0;
+let start;
+
+
+function restartTimer() {
+    timerBox.style.width = "410px";
+    console.log(timerBox.style.width)
+    if (currentAnimationID) {
+        start = undefined;
+        window.cancelAnimationFrame(currentAnimationID);
+    }
+
+    currentAnimationID = window.requestAnimationFrame(timerCallback);
+}
+
+// code based off MDN reqAniFrame page
+function timerCallback(timestamp) {
+    if (start === undefined) { // if the start is undefined then set it to the start if this animation. This marks the first frame
+        start = timestamp;
+    }
+    const elapsed = timestamp - start; // see how long it has been since the start
+    const progress = Math.min(elapsed / 15000, 1); // 15k is the time we want it to last in milliseconds. Divide them to create a % basically
+    // Math.min() is used here to make sure the element stops at exactly 200px
+    const newWidth = 410-progress*410 // subtract the width * the progress from the actual width
+    //+(timerBox.style.width.replace("px", ""));
+   
+    // code to change the color || Really like this!
+
+    red = Math.min(progress*2*255, 255); // 
+    
+    green = Math.min(510-(progress*2)*255, 255);
+
+
+    timerBox.style.backgroundColor = `rgb(${red} ${green} 150)`
+
+    timerBox.style.width = newWidth + "px"; // set the wdth to the new value with px
+    if (progress < 1) { // if the progress is above 1 then don't call the next frame
+        currentAnimationID = requestAnimationFrame(timerCallback);
+    }
+}
