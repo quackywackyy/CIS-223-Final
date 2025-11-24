@@ -256,12 +256,12 @@ function timerCallback(timestamp) {
    
     // code to change the color || Really like this!
 
-    red = Math.min(progress*2*255, 255); // 
+    red = Math.min(progress*2*255, 255); // slowely raise the red value to 510, but if it is higher than 255, use 255 instead
     
-    green = Math.min(510-(progress*2)*255, 255);
+    green = Math.min(510-(progress*2)*255, 255); // slowely lower the green value from 510 to 255, but it will use 255 until the green value is below 255
 
 
-    timerBox.style.backgroundColor = `rgb(${red} ${green} 150)`
+    timerBox.style.backgroundColor = `rgb(${red} ${green} 150)` // set the background color of the timerbox, withh some extra blue to make it loo nice
 
     timerBox.style.width = newWidth + "px"; // set the wdth to the new value with px
     if (progress < 1) { // if the progress is above 1 then don't call the next frame
