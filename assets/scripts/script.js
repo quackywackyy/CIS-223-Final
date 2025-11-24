@@ -235,7 +235,6 @@ let start;
 
 function restartTimer() {
     timerBox.style.width = "410px";
-    console.log(timerBox.style.width)
     if (currentAnimationID) {
         start = undefined;
         window.cancelAnimationFrame(currentAnimationID);

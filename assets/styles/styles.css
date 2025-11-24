@@ -80,8 +80,11 @@ body {
 
     width: var(--question-width);
     height: var(--question-height);
+
+    display: flex;
     text-align: center;
-    line-height: 6em;
+    justify-content: center; 
+    align-items: center;
 }
 
 .question-hover:hover {
