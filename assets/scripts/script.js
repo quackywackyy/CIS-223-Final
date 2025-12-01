@@ -189,7 +189,9 @@ async function gameEnd() {
         difMult = 1;
     } else if (difficulty === "medium") {
         difMult = 2;
-    } else {difMult = 3;}
+    } else {
+        difMult = 3;
+    }
 
     // code the calculate the final score
     const finalScore = (
@@ -203,7 +205,7 @@ Categories: ${endCats.split(",").join(", ").replaceAll("_", " ")}.
 Difficulty: ${difficulty}.
 Final score: ${finalScore}!`
 
-    /* code to disable everything and show end screen */
+   // the indentation here is weird cuz new lines weren't working
 }
 
 
@@ -228,7 +230,9 @@ function createQuestion(questionNumber) {
             answers[index], 
             index+1, 
             rightAnswer === answers[index] ? true : false
-        ); // create a new question using the array's current index's value. Set the answer number to index+1 since index is 0-3 and answer number 1-4. Quick and cool use of the ternary operator to set the right param to true if answer[index] is the correct answer.
+        ); // create a new question using the array's current index's value. 
+        // Set the answer number to index+1 since index is 0-3 and answer number 1-4. 
+        // Quick and cool use of the ternary operator to set the right param to true if answer[index] is the correct answer.
         answerList.push(answer);
         
         answer.setCard();
@@ -271,7 +275,7 @@ function restartTimer() {
     currentAnimationID = window.requestAnimationFrame(timerCallback);
 }
 
-// code based off MDN reqAniFrame page
+// code based off MDN reqAniFrame page: https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
 function timerCallback(timestamp) {
     if (start === undefined) { // if the start is undefined then set it to the start if this animation. This marks the first frame
         start = timestamp;
