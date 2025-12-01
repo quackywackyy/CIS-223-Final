@@ -21,8 +21,13 @@ If I stick with this structure, I will need to figure out how to export the api 
 
 11/12/25
 added timer div, will edit color and width to shrink it down to 15 seconds
+
+11/30/25
+Lot of refactoring done, but unfortunately a lot of the code may be obsolete
 */
 const timerBox = document.getElementById("timer-box");
+const gameInfo = document.getElementById("information-box");
+
 
 const categoryDialog = document.getElementById("dialogC");
 const categoryButton = document.getElementById("category-button");
@@ -53,7 +58,7 @@ confirmDiffButton.addEventListener("click", () => {
 
 
 // Global Variables (here so I don't have to scroll up) Quiz code
-let life = 3;
+let questionsRight = 0; // just make this the number of questions IMPORTANT
 let timeToAnswer = 15; // time to answer questions in seconds
 
 // non-modifiable variables. I don't like all these variables, but all I'm trying to do is make it functional
@@ -82,15 +87,15 @@ class Answer {
 } // answer object to represent each answer
 
 
-
-
+let categories; // global categories variable so we can access that at the end of the game
+let difficulty;
 // listeners
 startButton.addEventListener("click", async () => { // this event listener will collect all the values of the check marks/radios AND change the page layout to start the quiz
 
-    const categories = document.querySelectorAll("input[type='checkbox']:checked"); // mdn help me find this cool trick
+    categories = document.querySelectorAll("input[type='checkbox']:checked"); // mdn help me find this cool trick
     const difficultyRadio = document.querySelectorAll("input[name='diff']:checked"); 
 
-    const difficulty = difficultyRadio[0].value;
+    difficulty = difficultyRadio[0].value;
     const categoryList = await formatCats(categories);
 
     // make the menu invisible and the questions visible by removing and adding the appropriate classes
@@ -116,11 +121,12 @@ startButton.addEventListener("click", async () => { // this event listener will 
 // Major changes needed. Since the event listeners were being added every time we made a card, it caused the cards to retain their listeners. SOOO we are going to find a way to make the listeners last forever.
 
 function whenClicked(cardNo) { // this gets really confusing, buckle up
+    currentNumber++;
     if (answerList[cardNo - 1].isRight === true) { // if it's RIGHT; see line 195
-        currentNumber++ // increment the question number
+        questionsRight++; // increment the questions right
         clearTimeout(currentTimeout); // clear the current question timeout
         if (currentNumber <= 10) { // if this isn't the final question
-
+            console.log(currentNumber + " we are still going")
             askQuestion(); // ask the next question
 
         } else { // if this is the final qustion, do something to end the game
@@ -128,11 +134,13 @@ function whenClicked(cardNo) { // this gets really confusing, buckle up
         }
 
     } else { //if it's WRONG; see line 195
-        currentNumber++ // increment the question number
-
-        loseLife(); // lose a life
         clearTimeout(currentTimeout); // clear the current question timeout
-        askQuestion(); // if the game is no longer going, this will do nothing
+        if (currentNumber <= 10) { // if this isn't the final question
+            askQuestion(); // ask the next question
+
+        } else { // if this is the final qustion, do something to end the game
+            gameEnd(); // call the function to end the game
+        }
     }
     // more css stuff that I haven't created yet 
 }
@@ -164,35 +172,52 @@ async function formatCats(categories) {
 }
 
 
-function loseLife() { // function to lose a life
-    life--;
-    console.log("lost a life: " + life);
-    if (life <= 0) {
-        gameEnd();
-    } else {
-        // anything else that would be done when we lose a life
-    }
 
-}
+// point of focus for 11/30/25
+async function gameEnd() {
+    gameStillGoing = false;
 
-function gameEnd() {
     document.getElementById("question-box").classList.add("invisible-div"); // not sure why, but this causes a lot of issues
     document.getElementById("end-screen").classList.remove("invisible-div");
-    gameStillGoing = false;
+    const gameDetails = document.getElementById("game-detail-screen");
+
+    let endCats = await formatCats(categories)
+
+    let difMult // final score difficulty multiplier
+    if (difficulty === "easy") {
+        difMult = 1;
+    } else if (difficulty === "medium") {
+        difMult = 2;
+    } else {difMult = 3;}
+
+    // code the calculate the final score
+    const finalScore = (
+        endCats.split(",").length *
+        questionsRight *
+        difMult
+    );
     
-    console.log("game ended:\nLives remaining: "+life+"\nQuestions completed: "+(currentNumber-1));
+    gameDetails.textContent = `Questions right: ${questionsRight}/10
+Categories: ${endCats.split(",").join(", ").replaceAll("_", " ")}.
+Difficulty: ${difficulty}.
+Final score: ${finalScore}!`
+
     /* code to disable everything and show end screen */
 }
 
+
+
+
 function createQuestion(questionNumber) {
     const question = triviaQuestions[questionNumber-1]; // so the handling of questions is easier
+    console.log(triviaQuestions[questionNumber-1])
     const rightAnswer = question.correctAnswer; // store a variable so we know which answer is the right one
 
     answerList.length = 0; // MERGE THESE ARRAYS. this is a debug array
 
     let answers = new Array();
-    answers.push(question.correctAnswer, question.incorrectAnswers[0], question.incorrectAnswers[1], question.incorrectAnswers[2]); // store the answers into the array
-    console.log(rightAnswer)
+    answers.push(rightAnswer, question.incorrectAnswers[0], question.incorrectAnswers[1], question.incorrectAnswers[2]); // store the answers into the array
+
     answers.sort(); // sort the answers in alphabetical order to jumble them up.
 
     document.getElementById("question-title").textContent = question.question // set the question title
@@ -211,8 +236,10 @@ function createQuestion(questionNumber) {
 
 
 async function askQuestion() {
-    if (gameStillGoing) { // if the game is still going,
+    if (gameStillGoing) { // if the game is still going, // check if this is useless or not now that when clicked has been changed 11/30/25
+
         createQuestion(currentNumber); // ask a question
+        gameInfo.textContent = `${currentNumber}/10` // change the question number visible 
         restartTimer();
         if (currentNumber < 10) { // if the question number is below 10 (max amount of questions)
             currentTimeout = setTimeout(() => {

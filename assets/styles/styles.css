@@ -17,13 +17,14 @@ body {
     background-image: url("/assets/images/quiz_background.png");
     background-position-x: center;
     background-size: cover;
+    
     display: flex;
     justify-content: center;
-
+    align-items: center;
+    height: 90vh
 }
 
 #menu {
-    margin-top: 25%;
     background-color: aliceblue;  
     display: grid;
 }
@@ -40,8 +41,21 @@ body {
 
 /*ALl colors are temp*/
 
+#end-screen {
+    width: 410px;
+    padding: 20px;
+    background-color: aliceblue;  
+
+    line-height: 1.25em;
+    white-space: pre-wrap;
+    display: inline;
+    text-align: center;
+    align-items: center;
+    font-weight: bold;
+}
+
 #question-box {
-    margin-top: 15%;
+    max-height: 20em;
     display:grid;
     grid-template-columns: repeat(2, var(--question-width));
     grid-template-rows: auto;
@@ -50,8 +64,9 @@ body {
 }
 
 #question-title {
+    padding: 5px;
     grid-column: 1 / span 2;
-    line-height: 3em;
+ 
     text-align: center;
     background-color: aliceblue;
     border-radius: 5px;
@@ -71,6 +86,12 @@ body {
     margin-top: 25%;
 }
 
+#information-box {
+    width: 410px;
+    display: flex;
+    justify-content: right; 
+    align-items: right;
+}
 .question {
     background-color: aliceblue;
     border-color: aliceblue;

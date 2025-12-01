@@ -84,6 +84,9 @@
     </div>
 
     <div id="question-box" class="invisible-div">
+        <div id="information-box">
+
+        </div>
         <div id="question-title">
             Question title
         </div>
@@ -110,7 +113,15 @@
         <p>Something went wrong loading questions. Try again later</p>
     </div>
     <div id="end-screen" class="invisible-div">
-        <p>Game over!</p>
+        <p style="font-size: 20px;">Game over!</p>
+        <br>
+        <p id="game-detail-screen">
+            Questions right:
+            Categories: 
+            Difficulty:
+            Final score:
+        </p>
+        <button onclick="location.reload()">Restart quiz</button>
     </div>
 </body>
 </html>
