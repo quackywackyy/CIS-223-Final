@@ -25,6 +25,7 @@ added timer div, will edit color and width to shrink it down to 15 seconds
 11/30/25
 Lot of refactoring done, but unfortunately a lot of the code may be obsolete
 */
+
 const timerBox = document.getElementById("timer-box");
 const gameInfo = document.getElementById("information-box");
 

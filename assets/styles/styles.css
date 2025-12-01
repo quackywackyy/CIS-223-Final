@@ -53,6 +53,9 @@ body {
     align-items: center;
     font-weight: bold;
 }
+#difficulties {
+    display: grid;
+}
 
 #question-box {
     max-height: 20em;
